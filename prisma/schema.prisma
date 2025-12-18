@@ -12,8 +12,15 @@ datasource db {
   provider = "postgresql"
 }
 
+model Comment {
+  id Int @default(autoincrement()) @id
+  comment String 
+  post Posts @relation(fields: [postId], references: [id])
+  postId Int
+}
 model Posts {
   id Int @default(autoincrement()) @id
   title String 
   body String
+  Comments Comment[]
 }
