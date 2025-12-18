@@ -79,7 +79,7 @@ app.post("/",async (req,res) => {
 app.put("/:id",async (req,res) => {
 
     const id = req.params.id;
-    
+
     const {body} = req.body;
 
     //
@@ -94,3 +94,14 @@ app.put("/:id",async (req,res) => {
     return res.json(updatedPost);
 })
 
+
+//特定のidの投稿を削除
+app.delete("/:id",async (req,res) => {
+    const id = req.params.id;
+    const deletedPost = await prisma.posts.delete({
+        where: {
+            id: Number(id),
+        },
+    });
+    return res.json(deletedPost)
+})
